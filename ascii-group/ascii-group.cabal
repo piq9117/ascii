@@ -44,7 +44,7 @@ library
         StandaloneDeriving
 
     build-depends:
-      , hashable ^>= 1.4.0
+      , hashable 
 
     exposed-modules:
         ASCII.Group
@@ -57,7 +57,7 @@ test-suite test-ascii-group
 
     build-depends:
       , ascii-group
-      , hspec ^>= 2.10 || ^>= 2.11
+      , hspec 
 
     default-extensions:
         OverloadedStrings

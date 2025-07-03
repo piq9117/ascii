@@ -42,7 +42,7 @@ library
         StandaloneDeriving
 
     build-depends:
-      , hashable ^>= 1.3.5 || ^>= 1.4
+      , hashable
 
     exposed-modules:
         ASCII.Char
@@ -55,4 +55,4 @@ test-suite test-ascii-char
 
     build-depends:
       , ascii-char
-      , hspec ^>= 2.8.5 || ^>= 2.9 || ^>= 2.10 || ^>= 2.11
+      , hspec

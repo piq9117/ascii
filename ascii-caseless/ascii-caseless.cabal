@@ -45,7 +45,7 @@ library
     hs-source-dirs: library
 
     build-depends:
-      , hashable ^>= 1.3.5 || ^>= 1.4
+      , hashable 
 
     exposed-modules:
         ASCII.Caseless
@@ -62,4 +62,4 @@ test-suite test-ascii-caseless
 
     build-depends:
       , ascii-caseless
-      , hspec ^>= 2.8.5 || ^>= 2.9 || ^>= 2.10 || ^>= 2.11
+      , hspec 
