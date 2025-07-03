@@ -1,1 +1,1 @@
-packages: ascii
+packages: ascii ascii-case ascii-caseless ascii-char ascii-group ascii-superset ascii-th

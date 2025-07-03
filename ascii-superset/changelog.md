@@ -1,0 +1,201 @@
+### 1.3.0.2 (2025-01-20)
+
+Version bumps
+
+### 1.3.0.1 (2023-06-26)
+
+Raised language version to GHC2021.
+
+### 1.3.0.0 (2023-02-28)
+
+Removed the `ASCII.Lift` module. The `Lift` class is now gone. It was a mess. It
+was not possible to define a comprehensive set of instances for this class, and
+as a user it was difficult to guess what types `lift` would work on.
+
+All of the `lift` implementations were just other functions anyway: `fromChar`,
+`fromCharList`, `ASCII.Refinement.lift`, etc. Use one of those other polymorphic
+but slightly more specific functions instead.
+
+### 1.2.7.0 (2023-02-08)
+
+Add module `ASCII.Superset.Text`
+
+### 1.2.6.0 (2023-02-07)
+
+New module `ASCII.SupersetConversion` containing a new class,
+`StringSupersetConversion`, and the following function:
+
+```haskell
+convertRefinedString ::
+    StringSupersetConversion a b => ASCII a -> ASCII b
+```
+
+### 1.2.5.0 (2023-01-06)
+
+New in `ASCII.CaseRefinement`:
+
+```haskell
+forgetCase :: ASCII'case letterCase superset -> ASCII superset
+```
+
+And a new corresponding `Lift` instance:
+
+```haskell
+instance Lift (ASCII'case letterCase superset) (ASCII superset)
+```
+
+### 1.2.4.0 (2023-01-05)
+
+New classes:
+
+```haskell
+class ToCasefulChar (letterCase :: Case) char where
+    toCasefulChar :: CaselessChar -> char
+```
+
+```haskell
+class ToCasefulString (letterCase :: Case) string where
+    toCasefulString :: [CaselessChar] -> string
+```
+
+### 1.2.3.0 (2023-01-05)
+
+Add `instance Lift a a`
+
+### 1.2.2.0 (2023-01-05)
+
+`ASCII'case` now has instances for:
+
+* `ToCaselessChar`
+* `ToChar`
+* `ToCaselessString`
+* `ToString`
+
+### 1.2.1.0 (2023-01-05)
+
+Add `instance FromChar CaselessChar`
+
+### 1.2.0.0 (2023-01-03)
+
+Add to the `CharSuperset` class a new method:
+
+```haskell
+toCaseChar :: Case -> char -> char
+```
+
+Add to the `StringSuperset` class a new method:
+
+```haskell
+toCaseString :: Case -> string -> string
+```
+
+Add to the `ASCII.CaseRefinement` module:
+
+```haskell
+refineCharToCase :: forall letterCase char.
+    KnownCase letterCase => CharSuperset char =>
+    ASCII char -> ASCII'case letterCase char
+```
+
+```haskell
+refineStringToCase :: forall letterCase char.
+    KnownCase letterCase => StringSuperset char =>
+    ASCII char -> ASCII'case letterCase char
+```
+
+### 1.1.1.0 (2023-01-03)
+
+Add to `ASCII.CaseRefinement` the `KnownCase` class.
+
+### 1.1.0.0 (2023-01-03)
+
+Add classes `ToChar` (`isAsciiChar`, `toCharUnsafe`) and `FromChar`
+(`fromChar`), of which `CharSuperset` is now a subclass with no methods of its
+own.
+
+Add classes `ToString` (`isAsciiString`, `toCharListUnsafe`, `toCharListSub`)
+and `FromString` (`fromCharList`), of which `StringSuperset` is now a subclass
+which still has some methods (`substituteString` and `mapCharsUnsafe`).
+
+Add class `ToCaselessChar` (`isAsciiCaselessChar`, `toCaselessCharUnsafe`),
+which is a superclass of `ToChar`. Also added related functions
+`toCaselessCharMaybe`, `toCaselessCharOrFail`, and `toCaselessCharSub`.
+
+Add class `ToCaselessString` (`isAsciiCaselessString`,
+`toCaselessCharListUnsafe`, `toCaselessCharListSub`) which is a superclass of
+`ToString`. Also added related functions `toCaselessCharListMaybe` and
+`toCaselessCharListOrFail`.
+
+### 1.0.2.0 (2023-01-02)
+
+Add module `ASCII.CaseRefinement`
+
+* This includes `ASCII'case`, a new refinement type for characters strings.
+  It asserts that any character which is a letter must be of a particular case.
+
+Switch test suite from `hedgehog` to `hspec`
+
+### 1.0.1.15 (2022-01-02)
+
+Minor Cabal correction (change `extra-doc-files` to `extra-source-files`)
+
+### 1.0.1.14 (2022-12-30)
+
+Metadata changes only
+
+### 1.0.1.13 (2022-04-20)
+
+Drop support for `base` 4.11 (GHC 8.4) and `base` 4.12 (GHC 8.6)
+
+Modify documentation on the `Lift` class. Previously it indicated that the class
+was for converting ASCII into supersets of ASCII. The class's purpose is now
+restated as being a conversion from any character set to any other larger
+character set. The purpose is to indicate that the ASCII subset types defined in
+the `ascii-numbers` package may reasonably have `Lift` instances.
+
+### 1.0.1.12 (2022-03-22)
+
+Switch test-suite over to `hedgehog`
+
+### 1.0.0.10 (2022-01-09)
+
+Support GHC 9.2
+
+### 1.0.1.8 (2021-11-13)
+
+Support `hashable-1.4`
+
+### 1.0.1.6 (2021-09-26)
+
+Add a test suite
+
+Raise `text` lower bound to `1.2.3`
+
+### 1.0.1.4 (2021-02-10)
+
+Support GHC 9.0
+
+### 1.0.1.2 (2021-02-09)
+
+Support `bytestring-0.11`
+
+### 1.0.1.0 (2021-01-27)
+
+New functions:
+
+  - `convertCharOrFail`
+  - `convertStringMaybe`
+  - `convertStringOrFail`
+  - `convertCharMaybe`
+
+### 1.0.0.4 (2021-01-25)
+
+Add some comments
+
+### 1.0.0.2 (2020-05-18)
+
+Support GHC 8.10
+
+### 1.0.0.0 (2020-05-05)
+
+Initial release

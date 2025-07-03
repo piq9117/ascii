@@ -1,0 +1,63 @@
+cabal-version: 3.0
+
+name: ascii-th
+version: 1.2.0.1
+synopsis: Template Haskell support for ASCII
+category: Data, Text
+
+description:
+    This package defines Template Haskell support for ASCII,
+    including quasi-quoters for expressing ASCII strings.
+
+license: Apache-2.0
+license-file: license.txt
+
+author: Chris Martin
+maintainer: Chris Martin, Julie Moronuki
+
+homepage: https://github.com/typeclasses/ascii-th
+bug-reports: https://github.com/typeclasses/ascii-th/issues
+
+extra-source-files: *.md
+
+source-repository head
+    type: git
+    location: git://github.com/typeclasses/ascii-th.git
+
+common base
+    default-language: GHC2021
+    ghc-options: -Wall
+    default-extensions:
+        DataKinds
+        NoImplicitPrelude
+        OverloadedStrings
+        QuasiQuotes
+        TemplateHaskell
+        ViewPatterns
+    build-depends:
+      , ascii-case 
+      , ascii-caseless
+      , ascii-char 
+      , ascii-superset
+      , base 
+
+library
+    import: base
+    hs-source-dirs: library
+    build-depends:
+      , template-haskell
+    exposed-modules:
+        ASCII.TemplateHaskell
+        ASCII.QuasiQuoters
+
+test-suite test-ascii-th
+    import: base
+    type: exitcode-stdio-1.0
+    ghc-options: -fno-warn-overlapping-patterns
+    hs-source-dirs: test
+    main-is: Main.hs
+    build-depends:
+      , ascii-th
+      , bytestring 
+      , hspec 
+      , text 
